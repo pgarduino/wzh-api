@@ -1,0 +1,318 @@
+{
+    "swagger": "2.0",
+    "basePath": "/",
+    "paths": {
+        "/api/tasks": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Task%20List%20Response"
+                        }
+                    }
+                },
+                "summary": "Get all of filtered tasks",
+                "operationId": "get_tasks_list_controller",
+                "parameters": [
+                    {
+                        "name": "completed",
+                        "in": "query",
+                        "type": "boolean",
+                        "description": "Filter tasks based on their attribute \u201ccompleted\u201d. When not specified, returns all tasks."
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "type": "string",
+                        "description": "Displays tasks containing the provided string in their title. Defaults to an empty string."
+                    }
+                ],
+                "tags": [
+                    "tasks"
+                ]
+            }
+        },
+        "/api/tasks/{id}": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "description": "The task identifier",
+                    "name": "id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "HTTPStatus.NOT_FOUND": {
+                        "description": "Task not found"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    }
+                },
+                "summary": "Get Retrieves information from a single task",
+                "operationId": "get_task",
+                "tags": [
+                    "tasks"
+                ]
+            }
+        },
+        "/api/users": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/User%20List%20Response"
+                        }
+                    }
+                },
+                "summary": "Get all users",
+                "operationId": "get_users_list_controller",
+                "tags": [
+                    "users"
+                ]
+            }
+        },
+        "/api/users/{user_id}": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "description": "The user identifier",
+                    "name": "user_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "HTTPStatus.NOT_FOUND": {
+                        "description": "User not found"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                },
+                "summary": "Get Retrieves information from a single task",
+                "operationId": "get_user",
+                "tags": [
+                    "users"
+                ]
+            }
+        },
+        "/api/users/{user_id}/tasks": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "description": "The user identifier",
+                    "name": "user_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "HTTPStatus.NOT_FOUND": {
+                        "description": "User not found"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Task%20List%20Response"
+                        }
+                    }
+                },
+                "summary": "Retrieves all tasks from the specified user",
+                "operationId": "get_tasks_by_user",
+                "parameters": [
+                    {
+                        "name": "completed",
+                        "in": "query",
+                        "type": "boolean",
+                        "description": "Filter tasks based on their attribute \u201ccompleted\u201d. When not specified, returns all tasks."
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "type": "string",
+                        "description": "Displays tasks containing the provided string in their title. Defaults to an empty string."
+                    }
+                ],
+                "tags": [
+                    "users"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Wzh RestAPI",
+        "version": "1.0",
+        "description": "Serving app for Wzh"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "tags": [
+        {
+            "name": "tasks",
+            "description": "API endpoints to handle tasks"
+        },
+        {
+            "name": "users",
+            "description": "API endpoints to handle users"
+        }
+    ],
+    "definitions": {
+        "Task List Response": {
+            "properties": {
+                "total_items": {
+                    "type": "integer"
+                },
+                "data:": {
+                    "type": "array",
+                    "description": "List of filter tasks",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "Task": {
+            "required": [
+                "completed",
+                "title",
+                "user_id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The task unique identifier",
+                    "readOnly": true
+                },
+                "user_id": {
+                    "type": "integer",
+                    "description": "The user id of the task"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The title of the task"
+                },
+                "completed": {
+                    "type": "boolean",
+                    "description": "The title of the task"
+                }
+            },
+            "type": "object"
+        },
+        "User List Response": {
+            "properties": {
+                "total_items": {
+                    "type": "integer"
+                },
+                "data:": {
+                    "type": "array",
+                    "description": "List of users",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "User": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "name": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "address": {
+                    "$ref": "#/definitions/Address"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "website": {
+                    "type": "string"
+                },
+                "company": {
+                    "$ref": "#/definitions/Company"
+                }
+            },
+            "type": "object"
+        },
+        "Address": {
+            "properties": {
+                "street": {
+                    "type": "string"
+                },
+                "suite": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "zipcode": {
+                    "type": "string"
+                },
+                "geo": {
+                    "$ref": "#/definitions/Geo"
+                }
+            },
+            "type": "object"
+        },
+        "Geo": {
+            "properties": {
+                "lat": {
+                    "type": "number"
+                },
+                "lng": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "Company": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "catchPhrase": {
+                    "type": "string"
+                },
+                "bs": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "responses": {
+        "ParseError": {
+            "description": "When a mask can't be parsed"
+        },
+        "MaskError": {
+            "description": "When any error occurs on mask"
+        }
+    }
+}

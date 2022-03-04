@@ -43,5 +43,7 @@ $ python3 -m unittest
 ```
 
 ## API specification
-The documentation is made with swagger. 
-Navigate the base url of the api in the root. http://127.0.0.1:8000
+The documentation is made with swagger.
+- It can be viewed by navigating to the base url, root. of the API. http://127.0.0.1:8000
+- Or, It can also use swagger editor with https://github.com/pgarduino/wzh-api/doc/specs/swagger.json
+
