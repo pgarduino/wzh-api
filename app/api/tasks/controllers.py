@@ -29,6 +29,8 @@ class TasksListController(Resource):
             _filter.add_condition(Condition('completed', args.completed))
         if args.title:
             _filter.add_condition(Condition('title', args.title, 'contains'))
+        if args.user_id:
+            _filter.add_condition(Condition('user_id', args.user_id))
 
         tasks = self.service.find_all(_filter)
         response = {

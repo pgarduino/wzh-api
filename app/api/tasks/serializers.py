@@ -23,6 +23,12 @@ tasks_list_parser.add_argument(
     help='Displays tasks containing the provided string in their title. Defaults to an empty string.',
     location='args'
 )
+tasks_list_parser.add_argument(
+    'user_id',
+    type=int,
+    help='Filter tasks based on their attribute “user_id”. When not specified, returns all tasks.',
+    location='args'
+)
 tasks_list_response = tasks_ns.model(
     'Task List Response', {
         'total_items': fields.Integer,

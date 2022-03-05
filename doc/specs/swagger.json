@@ -26,6 +26,12 @@
                         "in": "query",
                         "type": "string",
                         "description": "Displays tasks containing the provided string in their title. Defaults to an empty string."
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "type": "integer",
+                        "description": "Filter tasks based on their attribute \u201cuser_id\u201d. When not specified, returns all tasks."
                     }
                 ],
                 "tags": [
@@ -133,6 +139,13 @@
                 "summary": "Retrieves all tasks from the specified user",
                 "operationId": "get_tasks_by_user",
                 "parameters": [
+                    {
+                        "in": "query",
+                        "description": "Filter tasks based on their attribute \u201cuser_id\u201d. When not specified, returns all tasks.",
+                        "name": "user_id",
+                        "required": true,
+                        "type": "integer"
+                    },
                     {
                         "name": "completed",
                         "in": "query",
