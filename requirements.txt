@@ -5,6 +5,7 @@ coverage==6.3.2
 Flask==1.1.2
 Flask-Injector==0.13.0
 flask-restx==0.5.1
+gunicorn==20.1.0
 importlib-resources==5.4.0
 injector==0.19.0
 itsdangerous==2.0.1
