@@ -5,16 +5,16 @@ class Config(object):
     DB_PATH = 'data'
 
 class DevelopmentConfig(Config):
-    ENV = 'development'
+    FLASK_ENV = 'development'
     DEBUG = True
     LOG_LEVEL = 'DEBUG'
 
 class TestingConfig(Config):
-    ENV = 'testing'
+    FLASK_ENV = 'testing'
     TESTING = True
 
 class ProductionConfig(Config):
-    ENV = 'production'
+    FLASK_ENV = 'production'
     LOG_LEVEL = 'INFO'
 
 config = {

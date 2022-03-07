@@ -30,11 +30,15 @@ $ pip3 install -r requirements.txt
 
 ### local
 ```shell
-$ FLASK_ENV=development flask run
+$ FLASK_ENV=development FLASK_APP=app/__main__ venv/bin/flask run
 ```
 ### production
 ```shell
-$ FLASK_ENV=production flask run
+$ FLASK_ENV=production FLASK_APP=app/__main__ venv/bin/flask run
+```
+or
+```shell
+$ gunicorn app.__main__:app
 ```
 
 ## How to run tests
